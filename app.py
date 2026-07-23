@@ -22,6 +22,9 @@ def home():
                 cur.execute("SELECT version();")
                 db_version = cur.fetchone()[0]
 
+                # 只保留前兩個字
+                db_version = " ".join(db_version.split()[:2])
+
         return render_template(
             "index.html",
             db_status="Connected",
