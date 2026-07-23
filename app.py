@@ -12,6 +12,7 @@ def home():
     測試 Render PostgreSQL 連線，
     並將資料庫狀態傳給 index.html。
     """
+    print("======= NEW VERSION =======")
 
     try:
         with get_connection() as conn:
