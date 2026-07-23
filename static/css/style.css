@@ -1,95 +1,275 @@
+/* ==============================
+   基本設定
+================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
 body {
-
   margin: 0;
+  min-height: 100vh;
 
-  background: #eef2f7;
+  background-color: #edf3f8;
 
-  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2f3f;
 
+  font-family:
+    Arial,
+    "Microsoft JhengHei",
+    "Noto Sans TC",
+    sans-serif;
 }
 
-.container {
 
-  width: 900px;
+/* ==============================
+   整體頁面容器
+================================= */
 
-  margin: 50px auto;
+.page-container {
+  width: calc(100% - 28px);
+  max-width: 1100px;
 
+  margin: 0 auto;
+  padding: 26px 0 30px;
 }
 
-.header {
 
-  background: #2c3e50;
+/* ==============================
+   頂部標題區
+================================= */
 
-  color: white;
+.hero {
+  min-height: 138px;
 
-  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  border-radius: 10px;
+  padding: 26px 20px;
+
+  background-color: #2c4155;
+
+  color: #ffffff;
 
   text-align: center;
 
+  border-radius: 10px;
+
+  box-shadow:
+    0 8px 20px rgba(32, 52, 70, 0.12);
 }
 
-.header h1 {
-
+.hero h1 {
   margin: 0;
 
-  font-size: 38px;
+  font-size: 2.5rem;
+  font-weight: 700;
 
+  letter-spacing: 0.5px;
 }
 
-.header p {
+.hero p {
+  margin: 8px 0 0;
 
-  margin-top: 10px;
+  color: #edf3f8;
 
-  color: #d0d7de;
-
+  font-size: 1rem;
 }
 
-.card {
 
+/* ==============================
+   資料庫狀態卡片
+================================= */
+
+.status-card {
   margin-top: 30px;
+  padding: 28px 30px 34px;
 
-  background: white;
-
-  padding: 30px;
+  background-color: #ffffff;
 
   border-radius: 10px;
 
-  box-shadow: 0 3px 15px rgba(0, 0, 0, .15);
-
+  box-shadow:
+    0 8px 22px rgba(32, 52, 70, 0.14);
 }
 
-.card h2 {
+.status-card h2 {
+  margin: 0 0 22px;
 
-  margin-top: 0;
+  color: #243b50;
 
-  color: #2c3e50;
-
+  font-size: 1.65rem;
 }
 
-.ok {
 
-  color: green;
+/* ==============================
+   狀態訊息
+================================= */
 
-  font-weight: bold;
+.status-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-  font-size: 20px;
+  min-height: 36px;
 
+  font-size: 1rem;
 }
 
-hr {
+.status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  margin: 20px 0;
+  width: 22px;
+  height: 22px;
 
+  font-size: 1.8rem;
+  font-weight: 700;
 }
+
+.status-success {
+  color: #111111;
+}
+
+.status-success .status-icon {
+  color: #009900;
+}
+
+.status-error {
+  color: #b42318;
+}
+
+.status-error .status-icon {
+  color: #d92d20;
+}
+
+
+/* ==============================
+   分隔線
+================================= */
+
+.divider {
+  margin: 18px 0 20px;
+
+  border: 0;
+  border-top: 1px solid #aeb8c1;
+}
+
+
+/* ==============================
+   資料庫資訊
+================================= */
+
+.database-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: start;
+
+  gap: 8px;
+}
+
+.info-label {
+  font-weight: 700;
+
+  color: #111111;
+}
+
+.info-value {
+  min-width: 0;
+
+  color: #111111;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ==============================
+   頁尾
+================================= */
 
 .footer {
+  margin-top: 38px;
 
-  margin-top: 40px;
+  color: #7c8791;
 
   text-align: center;
 
-  color: #888;
+  font-size: 1rem;
+}
+
+
+/* ==============================
+   平板與手機
+================================= */
+
+@media (max-width: 768px) {
+
+  .page-container {
+    width: calc(100% - 24px);
+    padding-top: 18px;
+  }
+
+  .hero {
+    min-height: 125px;
+    padding: 24px 16px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .status-card {
+    margin-top: 22px;
+    padding: 24px 22px 28px;
+  }
+
+  .status-card h2 {
+    font-size: 1.45rem;
+  }
+
+  .info-row {
+    grid-template-columns: 95px minmax(0, 1fr);
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .status-card {
+    padding: 22px 18px 26px;
+  }
+
+  .info-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .info-value {
+    padding-left: 0;
+  }
 
 }

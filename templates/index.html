@@ -2,66 +2,74 @@
 <html lang="zh-TW">
 
 <head>
-
   <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>MyApp01</title>
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 </head>
 
 <body>
 
-  <div class="container">
+  <main class="page-container">
 
-    <div class="header">
-
+    <!-- 頁面標題區 -->
+    <header class="hero">
       <h1>MyApp01</h1>
-
       <p>Flask + Render + PostgreSQL</p>
+    </header>
 
-    </div>
 
-    <div class="card">
+    <!-- 資料庫狀態區 -->
+    <section class="status-card">
 
       <h2>Database Status</h2>
 
-      <p>
+      {% if db_status == "Connected" %}
 
-        <span class="ok">✔</span>
+      <div class="status-message status-success">
+        <span class="status-icon">✓</span>
+        <span>{{ db_status }}</span>
+      </div>
 
-        {{ db_status }}
+      {% else %}
 
-      </p>
+      <div class="status-message status-error">
+        <span class="status-icon">✕</span>
+        <span>{{ db_status }}</span>
+      </div>
 
-      <hr>
+      {% endif %}
 
-      <p>
+      <hr class="divider">
 
-        <strong>Database</strong>
+      <div class="database-info">
 
-        {{ db_name }}
+        <div class="info-row">
+          <div class="info-label">Database</div>
+          <div class="info-value">{{ db_name }}</div>
+        </div>
 
-      </p>
+        <div class="info-row">
+          <div class="info-label">Version</div>
+          <div class="info-value">{{ db_version }}</div>
+        </div>
 
-      <p>
+      </div>
 
-        <strong>Version</strong>
+    </section>
 
-        {{ db_version }}
 
-      </p>
-
-    </div>
-
-    <div class="footer">
-
+    <!-- 頁尾 -->
+    <footer class="footer">
       © 2026 MyApp01
+    </footer>
 
-    </div>
+  </main>
 
-  </div>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
 
