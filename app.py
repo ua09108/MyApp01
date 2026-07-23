@@ -1,39 +1,59 @@
-import os
-import psycopg
-from flask import Flask
+from flask import Flask, render_template
+
+from database.db import get_connection
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def hello():
-
-    database_url = os.environ.get("DATABASE_URL")
-
-    if not database_url:
-        return "DATABASE_URL Not Found"
+def home():
+    """
+    首頁：
+    測試 Render PostgreSQL 連線，
+    並將資料庫狀態傳給 index.html。
+    """
 
     try:
-        with psycopg.connect(database_url) as conn:
+        with get_connection() as conn:
             with conn.cursor() as cur:
-
                 cur.execute("SELECT current_database();")
                 db_name = cur.fetchone()[0]
 
                 cur.execute("SELECT version();")
-                version = cur.fetchone()[0]
+                db_version = cur.fetchone()[0]
 
-        return f"""
-        <h2>Render PostgreSQL 測試成功</h2>
+        return render_template(
+            "index.html",
+            db_status="Connected",
+            db_name=db_name,
+            db_version=db_version,
+        )
 
-        <p><b>Database：</b>{db_name}</p>
+    except Exception as error:
+        app.logger.exception("PostgreSQL connection failed")
 
-        <p><b>Version：</b>{version}</p>
-        """
+        return render_template(
+            "index.html",
+            db_status=f"Connection failed: {error}",
+            db_name="-",
+            db_version="-",
+        ), 500
 
-    except Exception as e:
-        return f"<pre>{e}</pre>"
+
+@app.route("/health")
+def health():
+    """
+    提供 Render 或監控工具檢查 Web Service 是否正常。
+    """
+    return {
+        "status": "ok",
+        "service": "MyApp01",
+    }
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True,
+    )

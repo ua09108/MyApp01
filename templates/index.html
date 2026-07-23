@@ -1,15 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 
 <head>
+
+  <meta charset="UTF-8">
+
   <title>MyApp01</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 
 <body>
 
-  <h1>Hello TEKTRO</h1>
+  <div class="container">
 
-  <p>Welcome to Flask.</p>
+    <div class="header">
+
+      <h1>MyApp01</h1>
+
+      <p>Flask + Render + PostgreSQL</p>
+
+    </div>
+
+    <div class="card">
+
+      <h2>Database Status</h2>
+
+      <p>
+
+        <span class="ok">✔</span>
+
+        {{ db_status }}
+
+      </p>
+
+      <hr>
+
+      <p>
+
+        <strong>Database</strong>
+
+        {{ db_name }}
+
+      </p>
+
+      <p>
+
+        <strong>Version</strong>
+
+        {{ db_version }}
+
+      </p>
+
+    </div>
+
+    <div class="footer">
+
+      © 2026 MyApp01
+
+    </div>
+
+  </div>
 
 </body>
 
